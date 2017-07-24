@@ -1,0 +1,13 @@
+# Example multideployer.yaml file
+---
+# version has to exists and needs to be 1.0
+version: 1.0
+# List of apps to be deployed
+apps:
+  - name: aws-codedeploy-sample-tomcat
+    # Source where to download the bundle from. Follow this format:
+    # github://user/repo
+    # Only github is supported
+    source: github://awslabs/aws-codedeploy-sample-tomcat
+    # Git SHA for the release to be deployed
+    release: 6f320c486c103cd046eec61b74c71c1a15184035
