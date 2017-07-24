@@ -4,7 +4,7 @@
 
 from distutils.core import setup
 from setuptools import find_packages
-import multideployer
+import codedeploy_multideployer
 import re
 
 
@@ -28,7 +28,7 @@ reqs = parse_requirements('requirements.txt')
 
 setup(
     name='codedeploy-multideployer',
-    version=multideployer.__version__,
+    version=codedeploy_multideployer.__version__,
     description="Deploy multiple applications in one deployment group.",
     author="Rakuten TV Systems department",
     author_email="systems@wuaki.tv",
