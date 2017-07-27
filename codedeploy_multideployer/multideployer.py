@@ -87,8 +87,13 @@ def deploy(app_name, deploy_dir, codedeploy_local_path):
         raise Exception("codedeploy-local not found in " +
                         codedeploy_local_path)
     codedeploy_local = sh.Command(codedeploy_local_path)
-    log.info(codedeploy_local("--bundle-location " + deploy_dir + "/" +
-                              app_name + "/bundle"))
+    output = codedeploy_local("--bundle-location " + deploy_dir + "/" +
+                              app_name + "/bundle")
+    log.info(output)
+    # XXX codedeploy-local always return 0 (even if a script failed)
+    if "Your local deployment failed while trying to execute your script" \
+            in output:
+        raise Exception("codedeploy-local failed running some script")
 
 
 def multideploy(options):
