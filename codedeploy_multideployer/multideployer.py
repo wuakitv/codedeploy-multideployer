@@ -210,11 +210,21 @@ def start():
                         default='multideployer.yaml',
                         metavar="CONFIG_FILE",
                         help="Config file. Default: multideployer.yaml")
+    parser.add_argument('-l', '--log',
+                        default='/var/log/codedeploy-multideployer/' +
+                                'multideployer.log',
+                        metavar="LOG_FILE",
+                        help="Log file")
 
     options = parser.parse_args()
-    logging.basicConfig(level=options.loglevel)
-    log.debug('Options: ' + str(options))
     try:
+        if not os.path.exists(os.path.dirname(options.log)):
+            os.makedirs(os.path.dirname(options.log))
+        log.addHandler(logging.FileHandler(options.log))
+        log.addHandler(logging.StreamHandler(sys.stdout))
+        logging.basicConfig(level=options.loglevel)
+        log.debug('Options: ' + str(options))
+
         multideploy(options)
     except OSError as e:
         log.error(format(e))
