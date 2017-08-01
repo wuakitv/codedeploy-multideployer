@@ -1,9 +1,9 @@
 # codedeploy-multideployer
 
 ```
-Deploys multiple CodeDeploy projects in one shot.
 usage: multideployer [-h] [-V] [-d] [-v] [-f] [-a APP_NAME] [-g GITHUB_TOKEN]
                      [-c CODEDEPLOY_LOCAL_PATH] [--config CONFIG_FILE]
+                     [-l LOG_FILE]
 
 Deploys multiple CodeDeploy projects in one shot.
 
@@ -24,4 +24,6 @@ optional arguments:
   -c CODEDEPLOY_LOCAL_PATH, --codedeploy-local-path CODEDEPLOY_LOCAL_PATH
                         Full path to the codedeploy-local script
   --config CONFIG_FILE  Config file. Default: multideployer.yaml
+  -l LOG_FILE, --log LOG_FILE
+                        Log file
 ```
