@@ -1,15 +1,15 @@
 # codedeploy-multideployer
 
-_codedeploy-multideployer_ uses [AWS CodeDeploy](https://aws.amazon.com/codedeploy/) todeploy multiple applications on the same instance in one shot.
+_codedeploy-multideployer_ uses [AWS CodeDeploy](https://aws.amazon.com/codedeploy/) to deploy multiple applications on the same instance in one shot.
 
 ## Motivation
 
-[AWS CodeDeploy](https://aws.amazon.com/codedeploy/) is a great tool, but it's designed to deploy only one application to a single instance. Associating multiple deployment groups to the same autoscaling group [is not recommended](http://docs.aws.amazon.com/codedeploy/latest/userguide/integrations-aws-auto-scaling.html):
+[AWS CodeDeploy](https://aws.amazon.com/codedeploy/) is a great tool, but it's designed to deploy only one application to a single instance. Associating multiple deployment groups to the same AutoScaling group [is not recommended](http://docs.aws.amazon.com/codedeploy/latest/userguide/integrations-aws-auto-scaling.html):
 
 * https://stackoverflow.com/questions/43134523/multiple-aws-codedeploy-applications-in-a-newly-added-instance
 * https://stackoverflow.com/questions/38979802/how-can-i-deploy-multiple-applications-to-a-instance-using-aws-codedeploy
 
-_codedeploy-multideployer_ groups multiple deploys in one so only one deployment group needs to be associated to an autoscaling group.
+_codedeploy-multideployer_ groups multiple deploys in one so only one deployment group needs to be associated to an AutoScaling group.
 
 ## Requirements
 
