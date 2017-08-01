@@ -28,7 +28,7 @@ _codedeploy_multideployer_ uses this tool to locally deploy all the required app
 It can be installed either system-wide or inside a virtualenv:
 
 ```
-python setup.py install
+python3 setup.py install
 ```
 
 CodeDeploy agent needs to be installed following [AWS documentation](http://docs.aws.amazon.com/codedeploy/latest/userguide/codedeploy-agent-operations-install.html)
