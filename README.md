@@ -33,7 +33,7 @@ python setup.py install
 
 CodeDeploy agent needs to be installed following [AWS documentation](http://docs.aws.amazon.com/codedeploy/latest/userguide/codedeploy-agent-operations-install.html)
 
-_codedeploy_local_ also has to be installed independently from the regular _codedeploy-agent_. As this tool is not yet ready for production, some changes are required before it can be used. We've opened a pull request to the main project so this change is [merged into master](https://github.com/aws/aws-codedeploy-agent/pull/124)
+_codedeploy_local_ also has to be installed independently from the regular _codedeploy-agent_. As this tool is not yet ready for production, some changes are required before it can be used. We've opened a pull request to the main project so this change is [merged into master](https://github.com/aws/aws-codedeploy-agent/pull/124).
 
 Until then it needs to be installed with our modifications on a different path:
 
