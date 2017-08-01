@@ -143,15 +143,21 @@ def multideploy(options):
         last_state = {}
     log.debug("Last state: " + str(last_state))
 
+    state = {}
     for app in deploy_apps:
-        if app['release'] != last_state.get(app['name'], {}).get('release'):
+        if app.get('force', False) or app['release'] != \
+                last_state.get(app['name'], {}).get('release'):
             download_bundle(app['name'], app['source'], app['release'],
                             options.github_token, deploy_dir)
             deploy(app['name'], deploy_dir, options.codedeploy_local_path)
         else:
             log.debug(app['name'] + ' already deployed with release ' +
                       app['release'] + ". Skipping...")
+        state[app['name']] = {'release': app['release']}
 
+    # Write to last_state.yaml
+    with open(MULTIDEPLOYER_DIR + '/last_state.yaml', 'w') as outfile:
+        yaml.dump(state, outfile, default_flow_style=False)
     # Clean old deploy directories
     search_dir = MULTIDEPLOYER_DIR + "/deploys/"
     os.chdir(search_dir)
