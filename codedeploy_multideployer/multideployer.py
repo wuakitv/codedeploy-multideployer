@@ -89,7 +89,7 @@ def deploy(app_name, deploy_dir, codedeploy_local_path):
     codedeploy_local = sh.Command(codedeploy_local_path)
     output = codedeploy_local("--bundle-location " + deploy_dir + "/" +
                               app_name + "/bundle",
-                              "--deployment-group-id", app_name +
+                              "--deployment-group", app_name +
                               "-local-deployment-application")
     log.info(output)
     # XXX codedeploy-local always return 0 (even if a script failed)
