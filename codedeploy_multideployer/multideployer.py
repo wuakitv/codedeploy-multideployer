@@ -79,14 +79,15 @@ def download_bundle(app_name, app_source, app_release, github_token,
         raise Exception('Source ' + o.scheme + ' not supported.')
 
 
-def deploy(app_name, deploy_dir, codedeploy_local_path):
+def deploy(app_name, release, deploy_dir, codedeploy_local_path):
     log.info("Deploying app: " + app_name)
     if not os.path.isfile(deploy_dir + "/" + app_name + "/bundle/appspec.yml"):
         raise Exception("appspec.yml not found in app " + app_name)
     if not os.path.isfile(codedeploy_local_path):
         raise Exception("codedeploy-local not found in " +
                         codedeploy_local_path)
-    codedeploy_local = sh.Command(codedeploy_local_path)
+    codedeploy_local = sh.Command(codedeploy_local_path,
+                                  _env={"GIT_COMMIT": release})
     output = codedeploy_local("--bundle-location", deploy_dir + "/" +
                               app_name + "/bundle",
                               "--type", "directory",
@@ -152,7 +153,8 @@ def multideploy(options):
                 last_state.get(app['name'], {}).get('release'):
             download_bundle(app['name'], app['source'], app['release'],
                             options.github_token, deploy_dir)
-            deploy(app['name'], deploy_dir, options.codedeploy_local_path)
+            deploy(app['name'], app['release'], deploy_dir,
+                   options.codedeploy_local_path)
         else:
             log.debug(app['name'] + ' already deployed with release ' +
                       app['release'] + ". Skipping...")
