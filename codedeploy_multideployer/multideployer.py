@@ -86,13 +86,14 @@ def deploy(app_name, release, deploy_dir, codedeploy_local_path):
     if not os.path.isfile(codedeploy_local_path):
         raise Exception("codedeploy-local not found in " +
                         codedeploy_local_path)
-    codedeploy_local = sh.Command(codedeploy_local_path,
-                                  _env={"GIT_COMMIT": release})
+    codedeploy_local = sh.Command(codedeploy_local_path)
+
     output = codedeploy_local("--bundle-location", deploy_dir + "/" +
                               app_name + "/bundle",
                               "--type", "directory",
                               "--deployment-group", app_name +
-                              "-local-deployment-application")
+                              "-local-deployment-application",
+                              _env={"GIT_COMMIT": release})
     log.info(output)
     # XXX codedeploy-local always return 0 (even if a script failed)
     if "Your local deployment failed while trying to execute your script" \
