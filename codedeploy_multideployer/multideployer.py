@@ -62,7 +62,7 @@ def download_bundle(app_name, app_source, app_release, github_token,
               "/tarball/" + app_release
         if github_token:
             opener = urllib.request.build_opener()
-            opener.addheaders = [('Authorization', github_token)]
+            opener.addheaders.append(('Authorization', 'token ' + github_token))
             urllib.request.install_opener(opener)
         destdir = deploy_dir + "/" + app_name
         os.makedirs(destdir)
