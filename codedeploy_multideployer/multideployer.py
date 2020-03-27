@@ -61,13 +61,13 @@ def download_bundle(app_name, app_source, app_release, github_token,
         url = "https://api.github.com/repos/" + o.netloc + o.path + \
               "/tarball/" + app_release
         if github_token:
-            final_url = url + "?access_token=" + github_token
-        else:
-            final_url = url
+            opener = urllib.request.build_opener()
+            opener.addheaders.append(('Authorization', 'token ' + github_token))
+            urllib.request.install_opener(opener)
         destdir = deploy_dir + "/" + app_name
         os.makedirs(destdir)
         log.info("Downloading bundle: " + url + " to " + destdir)
-        urllib.request.urlretrieve(final_url, destdir + "/bundle.tar.gz")
+        urllib.request.urlretrieve(url, destdir + "/bundle.tar.gz")
         bundle_file = tarfile.open(destdir + "/bundle.tar.gz", mode="r:gz")
         log.debug("Extracting bundle to " + destdir + "/bundle")
         os.makedirs(destdir + "/bundle")
